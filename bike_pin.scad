@@ -71,3 +71,9 @@ levels = [
     }
     
 }
+
+module roundMeshFromPoints(points, height, radius) {
+    for (i = [0:len(points)-1]) {
+        polyhedron(points=[points[i], points[i+1], [points[i+1][0], points[i+1][1], 0], [points[i][0], points[i][1], 0]]);
+    }
+}
