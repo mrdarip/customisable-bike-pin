@@ -14,4 +14,12 @@ module bike_pin(height, iD, oD, thickness, pins){
         translate([-thickness/2,0,0])
         cube([thickness,oD/2,height]);
     }
+
+    dots = vx_gray(levels, center = true);
+
+    for (dot = dots) {
+        translate([dot[0],dot[1],0])
+        cylinder(h = dot[2], d=1);
+    }
+    
 }
