@@ -60,11 +60,14 @@ levels = [
 
     dots = vx_gray(levels, center = true);
 
+    translate([0,0,height/2])
+    rotate([0, 0, 180]) 
+    
     for (dot = dots) {
         rotate([0,0,dot[0][0]*180/len(levels[0])])
-        translate([0,oD,dot[0][1]])
+        translate([0,oD/2,dot[0][1]/len(levels)*height])
         rotate([0,90,90])
-        cylinder(h = dot[1]/255, d=1);
+        cylinder(h = dot[1]/255, d=0.5);
     }
     
 }
