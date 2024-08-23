@@ -6,12 +6,12 @@ module bike_pin(height, iD, oD, thickness, pins){
         union(){
             difference(){
                 cylinder(h = height, d=oD);
-                cylinder(h = height, d=oD-thickness);
+                cylinder(h = height, d=oD-thickness*2);
             }
             
             difference(){
+                cylinder(h = height, d=iD+thickness*2);
                 cylinder(h = height, d=iD);
-                cylinder(h = height, d=iD-thickness);
             }
 
             for (i=[0:pins-1]){
