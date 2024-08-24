@@ -38,7 +38,7 @@ levels = [
     roundMeshFromPoints(levels, height, oD/2);
 }
 
-a = function (map, j, i) i*180/len(map[0]);
+a = function (map, j, i) i*180/(len(map[0])+1);
 y = function (map, i, height) j * height / len(map);
 function h(map, i, j, height) = map[j][i] * height / 255;
 
