@@ -123,7 +123,7 @@ module bike_pin(height, iD, oD, thickness, pins){
 
 a = function (map, j, i) i*150/(len(map[0])+1);
 y = function (map, j, height) j * height / (len(map)-1);
-function h(map, i, j, height) = 1 + map[j][i] / 255 * 0.03;
+function h(map, i, j, height) = 1 + (1-map[j][i] / 255) * 0.03;
 
 module roundMeshFromPoints(levels, height, radius) {
     polyhedron(points=[
