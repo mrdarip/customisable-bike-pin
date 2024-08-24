@@ -105,12 +105,13 @@ module roundMeshFromPoints(levels, height, radius) {
     }*/
     echo(
         [
-            for (i = [0:len(levels)-1]) 
-                for (j = [0:len(levels[i])-1]) [
-                    levels[i][j],
-                    cos(a(levels, j, i)) * h(levels, i, j, height) * radius,
-                    sin(a(levels, j, i)) * h(levels, i, j, height) * radius,
-                    y(levels, j, height)
+            for (i = [0:len(levels)-2]) 
+                for (j = [0:len(levels[i])-2]) 
+                [
+                    j + i * len(levels[0]),
+                    j+1 + i * len(levels[0]),
+                    j+len(levels[0])+1 + i * len(levels[0]),
+                    j+len(levels[0]) + i * len(levels[0])
                 ]
         ]
     );
@@ -122,13 +123,13 @@ module roundMeshFromPoints(levels, height, radius) {
                     y(levels, j, height)
                 ]
         ], faces=[
-            for (i = [0:len(levels)/2-1]) 
-                for (j = [0:len(levels[i])/2-1]) 
+            for (i = [0:len(levels)-2]) 
+                for (j = [0:len(levels[i])-2]) 
                 [
-                    j*4 + 0 + i * 4 * (len(levels[0])/2),
-                    j*4 + 1 + i * 4 * (len(levels[0])/2),
-                    j*4 + 3 + i * 4 * (len(levels[0])/2),
-                    j*4 + 2 + i * 4 * (len(levels[0])/2)
+                    j                      + i * len(levels[0]),
+                    j                  + 1 + i * len(levels[0]),
+                    j + len(levels[0]) + 1 + i * len(levels[0]),
+                    j + len(levels[0])     + i * len(levels[0])
                 ]
         ]);
 }
