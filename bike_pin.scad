@@ -38,42 +38,44 @@ levels = [
     roundMeshFromPoints(levels, height, oD/2);
 }
 
-a = function (map, j, i) j*90/len(map[0]);
-y = function (map, i, height) i * height / len(map);
-function h(map, i, j, height) = map[i<len(map)?i:0][j<len(map[0])?j:0] * height / 255;
+a = function (map, j, i) i*180/len(map[0]);
+y = function (map, i, height) j * height / len(map);
+function h(map, i, j, height) = map[j][i] * height / 255;
 
 module roundMeshFromPoints(levels, height, radius) {
     for (i = [0:len(levels)-2]) {
         for (j = [0:len(levels[i])-2]) {
+            echo(i, j);
+
             color("red")
             translate([
-                cos(i),
-                sin(j),
-                h(levels,i,j,height)
+                cos(a(levels, j, i))*10,
+                sin(a(levels, j, i))*10,
+                j
             ])
             sphere(r=1);
 
             color("white")
             translate([
-                cos(i),
-                sin(j+1),
-                h(levels,i,j+1,height)
+                cos(a(levels, j+1, i))*10,
+                sin(a(levels, j+1, i))*10,
+                j+1
             ])
             sphere(r=1);
 
             color("blue")
             translate([
-                cos(i+1),
-                sin(j),
-                h(levels,i+1,j,height)
+                cos(a(levels, j, i+1))*10,
+                sin(a(levels, j, i+1))*10,
+                j
             ])
             sphere(r=1);
 
             color("green")
             translate([
-                cos(i+1),
-                sin(j+1),
-                h(levels,i+1,j+1,height)
+                cos(a(levels, j+1, i+1))*10,
+                sin(a(levels, j+1, i+1))*10,
+                j+1
             ])
             sphere(r=1);
         }
