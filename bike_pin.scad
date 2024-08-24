@@ -39,14 +39,14 @@ levels = [
     roundMeshFromPoints(levels, height, oD/2);
 }
 
-a = function (map, j, i) j*360/len(map[i]);
+a = function (map, j, i) j*360/len(map[0]);
 y = function (map, i, height) i * height / len(map);
-h = function (map, i, j, height) map[i][j] * height / 255;
+function h(map, i, j, height) = map[i<len(map)?i:0][j<len(map[0])?j:0] * height / 255;
 
 module roundMeshFromPoints(levels, height, radius) {
     for (i = [0:len(levels)-1]) {
         for (j = [0:len(levels[i])-1]) {
-            if (levels[i][j] == 0) {
+            if (true) {
                 polyhedron(points=
                 [
                     [
