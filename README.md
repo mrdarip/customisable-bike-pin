@@ -2,4 +2,4 @@
 
 ## Installation
 
-Install [dotscad](https://github.com/JustinSDK/dotSCAD) as its needed for the script to work.
+Generate your design with [JustinSDK/img2gray](https://github.com/JustinSDK/img2gray) tool
