@@ -135,46 +135,32 @@ levels = [
     roundMeshFromPoints(levels, height, oD/2);
 }
 
-a = function (map, j, i) i*360/(len(map[0])+1);
+a = function (map, j, i) i*90/(len(map[0])+1);
 y = function (map, j, height) j * height / (len(map)-1);
-function h(map, i, j, height) = 1 + map[j][i] / 255;
+function h(map, i, j, height) = 1 + map[j][i] / 255 * 0.03;
 
 module roundMeshFromPoints(levels, height, radius) {
     for (i = [0:len(levels)-2]) {
         for (j = [0:len(levels[i])-2]) {
             echo(i, j);
 
-            color("red")
-            translate([
+            polyhedron(points=[[
                 cos(a(levels, j, i)) * h(levels, i, j, height) * radius,
                 sin(a(levels, j, i)) * h(levels, i, j, height) * radius,
                 y(levels, j, height)
-            ])
-            sphere(r=1);
-
-            color("white")
-            translate([
+            ],[
                 cos(a(levels, j+1, i)) * h(levels, i, j+1, height) * radius,
                 sin(a(levels, j+1, i)) * h(levels, i, j+1, height) * radius,
                 y(levels, j+1, height)
-            ])
-            sphere(r=1);
-
-            color("blue")
-            translate([
+            ],[
                 cos(a(levels, j, i+1)) * h(levels, i+1, j, height) * radius,
                 sin(a(levels, j, i+1)) * h(levels, i+1, j, height) * radius,
                 y(levels, j, height)
-            ])
-            sphere(r=1);
-
-            color("green")
-            translate([
+            ],[
                 cos(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
                 sin(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
                 y(levels, j+1, height)
-            ])
-            sphere(r=1);
+            ]], faces=[[0,1,2],[1,3,2]]);
         }
     }
 }
