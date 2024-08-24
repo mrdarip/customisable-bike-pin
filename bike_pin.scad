@@ -105,24 +105,32 @@ module roundMeshFromPoints(levels, height, radius) {
     }*/
     echo(
         [
-            for (i = [0:len(levels)-2]) 
-                for (j = [0:len(levels[i])-2]) 
-                [
-                    j + i * len(levels[0]),
-                    j+1 + i * len(levels[0]),
-                    j+len(levels[0])+1 + i * len(levels[0]),
-                    j+len(levels[0]) + i * len(levels[0])
-                ]
+            
         ]
     );
     polyhedron(points=[
             for (i = [0:len(levels)-1]) 
-                for (j = [0:len(levels[i])-1]) [
+                for (j = [0:len(levels[i])-1])
+                [
                     cos(a(levels, j, i)) * h(levels, i, j, height) * radius,
                     sin(a(levels, j, i)) * h(levels, i, j, height) * radius,
                     y(levels, j, height)
+                ],
+
+
+
+
+            for (i = [0:len(levels)-1]) 
+                for (j = [0:len(levels[i])-1])
+                [
+                    cos(a(levels, j, i)) * radius,
+                    sin(a(levels, j, i)) * radius,
+                    y(levels, j, height)
                 ]
+    
+
         ], faces=[
+            //front face
             for (i = [0:len(levels)-2]) 
                 for (j = [0:len(levels[i])-2]) 
                 [
@@ -130,7 +138,54 @@ module roundMeshFromPoints(levels, height, radius) {
                     j                  + 1 + i * len(levels[0]),
                     j + len(levels[0]) + 1 + i * len(levels[0]),
                     j + len(levels[0])     + i * len(levels[0])
-                ]
+                ],
+
+
+            //back face
+            for (i = [0:len(levels)-2]) 
+                for (j = [0:len(levels[i])-2]) 
+                [
+                    j                      + i * len(levels[0]) + len(levels[0]) * len(levels),
+                    j                  + 1 + i * len(levels[0]) + len(levels[0]) * len(levels),
+                    j + len(levels[0]) + 1 + i * len(levels[0]) + len(levels[0]) * len(levels),
+                    j + len(levels[0])     + i * len(levels[0]) + len(levels[0]) * len(levels),
+                ],
+
+            //left face
+            for (i = [0:len(levels[0])-2]) 
+            [   
+                i,
+                i + len(levels[0]) * len(levels),
+                i + len(levels[0]) * len(levels) + 1,
+                i + 1
+            ],
+
+            //right face
+            for (i = [0:len(levels[0])-2]) 
+            [   
+                len(levels[0]) * len(levels) * 2 - len(levels[0]) + i,
+                len(levels[0]) * len(levels) * 1 - len(levels[0]) + i,
+                len(levels[0]) * len(levels) * 1 - len(levels[0]) + i + 1,
+                len(levels[0]) * len(levels) * 2 - len(levels[0]) + i + 1
+            ],
+
+            //bottom face
+            for (i = [0:len(levels[0])-2]) 
+            [   
+                len(levels) *  i,
+                len(levels) * (i + 1),
+                len(levels) * (i + 1) + len(levels[0]) * len(levels),
+                len(levels) *  i      + len(levels[0]) * len(levels),
+            ], 
+
+            //top face
+            for (i = [0:len(levels[0])-2]) 
+            [   
+                len(levels) *  i + len(levels[0]) -1,
+                len(levels) *  i      + len(levels[0]) * len(levels) + len(levels[0]) -1,
+                len(levels) * (i + 1) + len(levels[0]) * len(levels)+ len(levels[0]) -1,
+                len(levels) * (i + 1) + len(levels[0]) -1
+            ]
         ]);
 }
 
