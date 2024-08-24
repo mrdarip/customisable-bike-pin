@@ -38,9 +38,9 @@ levels = [
     roundMeshFromPoints(levels, height, oD/2);
 }
 
-a = function (map, j, i) i*180/(len(map[0])+1);
+a = function (map, j, i) i*45/(len(map[0])+1);
 y = function (map, i, height) j * height / len(map);
-function h(map, i, j, height) = map[j][i] * height / 255;
+function h(map, i, j, height) = 1 + map[j][i] / 255;
 
 module roundMeshFromPoints(levels, height, radius) {
     for (i = [0:len(levels)-2]) {
@@ -49,32 +49,32 @@ module roundMeshFromPoints(levels, height, radius) {
 
             color("red")
             translate([
-                cos(a(levels, j, i)) * h(levels, i, j, height),
-                sin(a(levels, j, i)) * h(levels, i, j, height),
+                cos(a(levels, j, i)) * h(levels, i, j, height) * radius,
+                sin(a(levels, j, i)) * h(levels, i, j, height) * radius,
                 j
             ])
             sphere(r=1);
 
             color("white")
             translate([
-                cos(a(levels, j+1, i)) * h(levels, i, j+1, height),
-                sin(a(levels, j+1, i)) * h(levels, i, j+1, height),
+                cos(a(levels, j+1, i)) * h(levels, i, j+1, height) * radius,
+                sin(a(levels, j+1, i)) * h(levels, i, j+1, height) * radius,
                 j+1
             ])
             sphere(r=1);
 
             color("blue")
             translate([
-                cos(a(levels, j, i+1)) * h(levels, i+1, j, height),
-                sin(a(levels, j, i+1)) * h(levels, i+1, j, height),
+                cos(a(levels, j, i+1)) * h(levels, i+1, j, height) * radius,
+                sin(a(levels, j, i+1)) * h(levels, i+1, j, height) * radius,
                 j
             ])
             sphere(r=1);
 
             color("green")
             translate([
-                cos(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height),
-                sin(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height),
+                cos(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
+                sin(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
                 j+1
             ])
             sphere(r=1);
