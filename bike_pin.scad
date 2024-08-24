@@ -144,7 +144,8 @@ module roundMeshFromPoints(levels, height, radius) {
         for (j = [0:len(levels[i])-2]) {
             echo(i, j);
 
-            polyhedron(points=[[
+            polyhedron(points=[
+            [
                 cos(a(levels, j, i)) * h(levels, i, j, height) * radius,
                 sin(a(levels, j, i)) * h(levels, i, j, height) * radius,
                 y(levels, j, height)
@@ -160,7 +161,41 @@ module roundMeshFromPoints(levels, height, radius) {
                 cos(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
                 sin(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
                 y(levels, j+1, height)
-            ]], faces=[[0,1,2],[1,3,2]]);
+            ],
+            
+            
+            
+            [
+                cos(a(levels, j, i)) * radius,
+                sin(a(levels, j, i)) * radius,
+                y(levels, j, height)
+            ],[
+                cos(a(levels, j+1, i)) * radius,
+                sin(a(levels, j+1, i)) * radius,
+                y(levels, j+1, height)
+            ],[
+                cos(a(levels, j, i+1)) * radius,
+                sin(a(levels, j, i+1)) * radius,
+                y(levels, j, height)
+            ],[
+                cos(a(levels, j+1, i+1)) * radius,
+                sin(a(levels, j+1, i+1)) * radius,
+                y(levels, j+1, height)
+            ]
+            ], faces=[
+                [0,1,2],
+                [1,3,2],
+                [1,5,3],
+                [5,7,3],
+                [5,4,7],
+                [4,6,7],
+                [4,0,6],
+                [0,2,6],
+                [2,3,6],
+                [3,7,6],
+                [4,5,0],
+                [5,1,0]
+                ]);
         }
     }
 }
