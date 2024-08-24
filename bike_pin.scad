@@ -63,17 +63,50 @@ levels = [
     translate([0,0,height/2])
     rotate([0, 0, 180]) 
     
-    for (dot = dots) {
+    /*for (dot = dots) {
         rotate([0,0,dot[0][0]*180/len(levels[0])])
         translate([0,oD/2,dot[0][1]/len(levels)*height])
         rotate([0,90,90])
         cylinder(h = dot[1]/255, d=0.5);
-    }
-    
+    }*/
+
+    roundMeshFromPoints(levels, height, oD/2);
 }
 
-module roundMeshFromPoints(points, height, radius) {
-    for (i = [0:len(points)-1]) {
-        polyhedron(points=[points[i], points[i+1], [points[i+1][0], points[i+1][1], 0], [points[i][0], points[i][1], 0]]);
+a = function (map, j, i) j*360/len(levels[i]);
+y = function (map, i, height) i * height / len(levels);
+h = function (map, i, j, height) levels[i][j] * height / 255;
+
+module roundMeshFromPoints(levels, height, radius) {
+    for (i = [0:len(levels)-1]) {
+        for (j = [0:len(levels[i])-1]) {
+            if (levels[i][j] == 0) {
+                polyhedron(points=
+                [
+                    [
+                        cos(a(i,j)) * radius + h(i,j,height),
+                        sin(a(i,j)) * radius + h(i,j,height),
+                        y(i,height)
+                    ],
+                    [
+                        cos(a(i,j+1)) * radius + h(i,j+1,height),
+                        sin(a(i,j+1)) * radius + h(i,j+1,height),
+                        y(i,height)
+                    ],
+                    [
+                        cos(a(i+1,j)) * radius + h(i+1,j,height),
+                        sin(a(i+1,j)) * radius + h(i+1,j,height),
+                        y(i+1,height)
+                    ],
+                    [
+                        cos(a(i+1,j+1)) * radius + h(i+1,j+1,height),
+                        sin(a(i+1,j+1)) * radius + h(i+1,j+1,height),
+                        y(i+1,height)
+                    ]
+                ]
+                , faces=[[0,1,2],[1,2,3]]);
+            }
+        }
     }
 }
+
