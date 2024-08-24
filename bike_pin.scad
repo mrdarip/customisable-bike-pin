@@ -4,7 +4,7 @@ $fn=100;
 bike_pin(10,5,10,1,6);
 
 module bike_pin(height, iD, oD, thickness, pins){
-    /*difference(){
+    difference(){
         //clip
         difference(){
             cylinder(h = height, d=oD);
@@ -15,7 +15,7 @@ module bike_pin(height, iD, oD, thickness, pins){
         //insertion hole
         translate([-thickness/2,0,0])
         cube([thickness,oD/2,height]);
-    }*/
+    }
 
     
 levels = [
@@ -39,7 +39,7 @@ levels = [
 }
 
 a = function (map, j, i) i*45/(len(map[0])+1);
-y = function (map, i, height) j * height / len(map);
+y = function (map, j, height) j * height / (len(map)-1);
 function h(map, i, j, height) = 1 + map[j][i] / 255;
 
 module roundMeshFromPoints(levels, height, radius) {
@@ -51,7 +51,7 @@ module roundMeshFromPoints(levels, height, radius) {
             translate([
                 cos(a(levels, j, i)) * h(levels, i, j, height) * radius,
                 sin(a(levels, j, i)) * h(levels, i, j, height) * radius,
-                j
+                y(levels, j, height)
             ])
             sphere(r=1);
 
@@ -59,7 +59,7 @@ module roundMeshFromPoints(levels, height, radius) {
             translate([
                 cos(a(levels, j+1, i)) * h(levels, i, j+1, height) * radius,
                 sin(a(levels, j+1, i)) * h(levels, i, j+1, height) * radius,
-                j+1
+                y(levels, j+1, height)
             ])
             sphere(r=1);
 
@@ -67,7 +67,7 @@ module roundMeshFromPoints(levels, height, radius) {
             translate([
                 cos(a(levels, j, i+1)) * h(levels, i+1, j, height) * radius,
                 sin(a(levels, j, i+1)) * h(levels, i+1, j, height) * radius,
-                j
+                y(levels, j, height)
             ])
             sphere(r=1);
 
@@ -75,7 +75,7 @@ module roundMeshFromPoints(levels, height, radius) {
             translate([
                 cos(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
                 sin(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height) * radius,
-                j+1
+                y(levels, j+1, height)
             ])
             sphere(r=1);
         }
