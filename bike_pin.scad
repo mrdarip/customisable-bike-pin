@@ -19,7 +19,7 @@ module bike_pin(height, iD, oD, thickness, pins){
 
     
 levels = [
-    [0,10,20],
+    [10,10,20],
     [30,40,50],
     [60,70,80]
 ];
@@ -49,32 +49,32 @@ module roundMeshFromPoints(levels, height, radius) {
 
             color("red")
             translate([
-                cos(a(levels, j, i))*10,
-                sin(a(levels, j, i))*10,
+                cos(a(levels, j, i)) * h(levels, i, j, height),
+                sin(a(levels, j, i)) * h(levels, i, j, height),
                 j
             ])
             sphere(r=1);
 
             color("white")
             translate([
-                cos(a(levels, j+1, i))*10,
-                sin(a(levels, j+1, i))*10,
+                cos(a(levels, j+1, i)) * h(levels, i, j+1, height),
+                sin(a(levels, j+1, i)) * h(levels, i, j+1, height),
                 j+1
             ])
             sphere(r=1);
 
             color("blue")
             translate([
-                cos(a(levels, j, i+1))*10,
-                sin(a(levels, j, i+1))*10,
+                cos(a(levels, j, i+1)) * h(levels, i+1, j, height),
+                sin(a(levels, j, i+1)) * h(levels, i+1, j, height),
                 j
             ])
             sphere(r=1);
 
             color("green")
             translate([
-                cos(a(levels, j+1, i+1))*10,
-                sin(a(levels, j+1, i+1))*10,
+                cos(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height),
+                sin(a(levels, j+1, i+1)) * h(levels, i+1, j+1, height),
                 j+1
             ])
             sphere(r=1);
