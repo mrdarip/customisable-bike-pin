@@ -19,9 +19,9 @@ module bike_pin(height, iD, oD, thickness, pins){
 
     
 levels = [
-    [0,128,255],
-    [128,255,0],
-    [255,0,128]
+    [0,16,32],
+    [80,120,160],
+    [200,230,255]
 ];
 
     dots = vx_gray(levels, center = true);
@@ -47,30 +47,40 @@ module roundMeshFromPoints(levels, height, radius) {
     for (i = [0:len(levels)-1]) {
         for (j = [0:len(levels[i])-1]) {
             if (true) {
-                polyhedron(points=
-                [
-                    [
-                        cos(a(levels,i,j)) * radius + h(levels,i,j,height),
-                        sin(a(levels,i,j)) * radius + h(levels,i,j,height),
+
+                    color("red")
+                    translate([
+                        cos(a(levels,i,j)) * (radius + h(levels,i,j,height)),
+                        sin(a(levels,i,j)) * (radius + h(levels,i,j,height)),
                         y(levels,i,height)
-                    ],
-                    [
-                        cos(a(levels,i,j+1)) * radius + h(levels,i,j+1,height),
-                        sin(a(levels,i,j+1)) * radius + h(levels,i,j+1,height),
+                    ])
+                    sphere(r=1);
+
+                    color("white")
+                    translate([
+                        cos(a(levels,i,j+1)) * (radius + h(levels,i,j+1,height)),
+                        sin(a(levels,i,j+1)) * (radius + h(levels,i,j+1,height)),
                         y(levels,i,height)
-                    ],
-                    [
-                        cos(a(levels,i+1,j)) * radius + h(levels,i+1,j,height),
-                        sin(a(levels,i+1,j)) * radius + h(levels,i+1,j,height),
+                    ])
+                    sphere(r=1);
+
+                    color("blue")
+                    translate([
+                        cos(a(levels,i+1,j)) * (radius + h(levels,i+1,j,height)),
+                        sin(a(levels,i+1,j)) * (radius + h(levels,i+1,j,height)),
                         y(levels,i+1,height)
-                    ],
-                    [
-                        cos(a(levels,i+1,j+1)) * radius + h(levels,i+1,j+1,height),
-                        sin(a(levels,i+1,j+1)) * radius + h(levels,i+1,j+1,height),
+                    ])
+                    sphere(r=1);
+
+                    color("green")
+                    translate([
+                        cos(a(levels,i+1,j+1)) * (radius + h(levels,i+1,j+1,height)),
+                        sin(a(levels,i+1,j+1)) * (radius + h(levels,i+1,j+1,height)),
                         y(levels,i+1,height)
-                    ]
-                ]
-                , faces=[[0,1,2],[1,2,3]]);
+                    ])
+                    sphere(r=1);
+                
+                
             }
         }
     }
