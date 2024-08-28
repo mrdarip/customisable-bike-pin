@@ -7,3 +7,4 @@ Generate your design with [JustinSDK/img2gray](https://github.com/JustinSDK/img2
 ![preview](image.png)
 
 stl file is available in [here](https://github.com/mrdarip/customisable-bike-pin/blob/main/bike_pin.stl)
+[thingverse](https://www.thingiverse.com/thing:6746244)
